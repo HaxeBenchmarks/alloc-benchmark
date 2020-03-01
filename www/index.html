@@ -18,18 +18,30 @@
             <li>Haxe 3 uses Hashlink 1.1, Haxe 4 Hashlink 1.10</li>
             <li>NodeJS compilation is run twice, with and without "-D js-es=6" (Haxe 4 builds only)</li>
 
-            <li>for each run benchmark allocates (using Bytes.alloc):
-                <ul>
-                    <li>one million times 100 bytes</li>
-                    <li>one million times 1000 bytes</li>
-                    <li>one million times 101 bytes</li>
-                    <li>one million times 1001 bytes</li>
-                    <li>one million times 102 bytes</li>
-                </ul>
-            </li>
-            <li>each allocated memory block gets initialised with zero (using Bytes.fill)</li>
-            <li>after allocating one million memory blocks each block is compared against a freshly allocated memory block of identical size (using Bytes.compare)</li>
+            <li>testcase code:<pre>		
+            var count:Int = 500000;
 
+            allocBytes(count, 100);
+            allocBytes(count, 1000);
+            allocBytes(count, 101);
+            allocBytes(count, 1001);
+            allocBytes(count, 102);
+
+            function allocBytes(count:Int, size:Int) {
+                var data:Array<Bytes> = [];
+                for (i in 0...count) {
+                    var bytes:Bytes = Bytes.alloc(size);
+                    bytes.fill(0, size, i);
+                    data.push(bytes);
+                }
+                for (i in 0...count) {
+                    var bytes:Bytes = Bytes.alloc(size);
+                    bytes.fill(0, size, i);
+                    bytes.compare(data[i]);
+                }
+            }
+            </pre></li>
+    
             <li>results update after every build (page doesn't automatically reload)</li>
             <li>sources available on <a href="https://github.com/HaxeBenchmarks/alloc-benchmark/">github</a></li>
         </ul>
@@ -92,6 +104,10 @@
         <tr>
             <th>date</th>
             <th>what</th>
+        </tr>
+        <tr>
+            <td>2020-03-01 11:20:00</td>
+            <td>reduced number of allocations from one million to 500,000</td>
         </tr>
         <tr>
             <td>2020-03-01 03:00:00</td>

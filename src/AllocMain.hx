@@ -5,7 +5,7 @@ class AllocMain {
 	public function new() {
 		var startTime = Timer.stamp();
 
-		var count:Int = 1000000;
+		var count:Int = 500000;
 
 		allocBytes(count, 100);
 		allocBytes(count, 1000);
