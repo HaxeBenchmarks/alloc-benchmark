@@ -1,0 +1,6 @@
+-lib benchmark-helper
+
+-cp src
+
+-main AllocMain
+
