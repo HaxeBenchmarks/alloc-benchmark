@@ -5,6 +5,7 @@ source benchmark.env
 readonly DATA=$*
 
 ./out/cpp/AllocMain $DATA
+./out/cppGCGen/AllocMain $DATA
 node out/AllocMain.js $DATA
 node out/AllocMain.es6.js $DATA
 java -jar out/java/AllocMain.jar $DATA
