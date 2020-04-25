@@ -140,6 +140,7 @@ pipeline {
                 cd versions/Haxe-3
                 readonly VER=`haxe -version`
                 echo "Running Haxe $VER benchmark"
+                ./installAndCompileHxcpp.sh
                 ./benchmark.sh | tee results.csv
                 '''
             }
@@ -152,6 +153,7 @@ pipeline {
                 cd versions/Haxe-4
                 readonly VER=`haxe -version`
                 echo "Running Haxe $VER benchmark"
+                ./installAndCompileHxcpp.sh
                 ./benchmark.sh | tee results.csv
                 '''
             }
@@ -164,6 +166,7 @@ pipeline {
                 cd versions/Haxe-nightly
                 readonly VER=`haxe -version`
                 echo "Running Haxe $VER benchmark"
+                ./installAndCompileHxcpp.sh
                 ./benchmark.sh | tee results.csv
                 '''
             }
